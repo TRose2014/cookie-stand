@@ -24,23 +24,16 @@ var renderStores = function(cookieStoresEl){
   article.appendChild(ul);
 
   //Creating for loop for li for Cookie Store One
+  //textContent template '6am: 13 cookies
   for(var i = 0; i < hoursOpen.length; i++){
-    var li = document.createElement('li');
-    li.textContent = hoursOpen[i];
+    var li= document.createElement('li');
+
+    var numberOfCookies = this.cookiePur();
+
+    var content = `${hoursOpen[i]}: ${numberOfCookies} cookies`;
+    li.textContent = content;
     ul.appendChild(li);
-  }
 
-  // for(var j = 0; j < this.length; j++){
-  //   var li = document.createElement('li');
-  //   li.textContent = this.allCookieStores[j];
-  //   ul.appendChild(li);
-  // }
-
-
-  for(var i = 0; i < hoursOpen.length; i++){
-    var li = document.createElement('li');
-    li.textContent = this.cookiePur();
-    ul.appendChild(li);
   }
 };
 
@@ -184,14 +177,12 @@ SalmonCookieStores.prototype.randomCustHour = function (){
 
 // };
 SalmonCookieStores.prototype.cookiePur = function(){
-  for(var i = 0; i < hoursOpen.length; i++){
-    this.randomCookie.push(Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust));
-    // var randomCookieHour = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
-    return this.randomCookie;
-  }
-  // randomCookie.push(this.cookiePur());
-  // sumRandomCookie += randomCookie;
+  var result = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
+  // var randomCookieHour = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
+  return result;
 };
+// randomCookie.push(this.cookiePur());
+// sumRandomCookie += randomCookie;
 
 SalmonCookieStores.prototype.render = renderStores;
 
