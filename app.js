@@ -60,23 +60,106 @@ var renderStores = function(cookieStoresEl){
 //   console.log(tableCreate());
 // }
 
-var tableEl = document.getElementById('cookieStoreTable');
+// var cookieStoreTable = function() {
 
-function tableCreate(tableEl) {
-  var body = document.getElementsByTagName('body');
-  var tbl = document.createElement('table');
-  var tbdy = document.createElement('tbody');
-  var td = document.createElement('td');
-  var tr = document.createElement('tr');
-  // body.appendChild(tbl);
-  tableEl.appendChild.body;
-  tbl.appendChild(tbdy);
-  td.textContent = 'test';
-  tr.appendChild(td);
-  tbdy.appendChild(tr);
+//   var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+//   // get the reference for the body
+//   var body = document.getElementsByTagName('body');
+
+//   // creates a <table> element and a <tbody> element
+//   var tbl = document.createElement('table');
+//   var tblBody = document.createElement('tbody');
+
+//   // creating all cells
+//   for (var i = 0; i < hoursOpen.length; i++) {
+//     // creates a table row
+//     var row = document.createElement('tr');
+
+//     for (var j = 0; j < this.randomCookie; j++) {
+//       // Create a <td> element and a text node, make the text
+//       // node the contents of the <td>, and put the <td> at
+//       // the end of the table row
+//       var cell = document.createElement('td');
+//       var cellText = document.createTextNode('cell in row '+i+', column '+j);
+//       cell.appendChild(cellText);
+//       row.appendChild(cell);
+//     }
+
+//     // add the row to the end of the table body
+//     tblBody.appendChild(row);
+//   }
+
+//   // put the <tbody> in the <table>
+//   tbl.appendChild(tblBody);
+//   // appends <table> into <body>
+//   // body.appendChild(tbl);
+//   // sets the border attribute of tbl to 2;
+//   tbl.setAttribute('border', '2');
+// };
+
+// 1. parent
+var cookieStoreTable = document.getElementById('cookieStoreTable');
+// 2. create element
+var theadEl = document.createElement('thead');
+// 3. append
+cookieStoreTable.appendChild(theadEl);
+
+var tbodyEl = document.createElement('tbody');
+cookieStoreTable.appendChild(tbodyEl);
+
+var tr = document.createElement('tr');
+theadEl.appendChild(tr);
+
+// var th = document.createElement('th');
+// tr.appendChild(th);
+
+th = document.createElement('th');
+tr.textContent = '6:00am';
+tr.appendChild(th);
+
+var th = document.createElement('th');
+tr.appendChild(th);
+
+th = cookieStoreTableHeadCell('6:00am');
+tr.appendChild(th);
+
+//fucntion cookieStoreTabHeadCell(typecontent, attr);
+
+function cookieStoreTableHeadCell(content) {
+  var resultElememt = document.createElement('th');
+  resultElememt.textContent = content;
+  return resultElememt;
 }
-tableCreate();
 
+var tbody = document.createElement('tbody');
+cookieStoreTable.appendChild(tbody);
+
+tr = document.createElement('tr');
+tbody.appendChild(tr);
+
+th = cookieStoreTableHeadCell('1st and Pike');
+tbody.appendChild(th);
+
+var td = document.createElement('td');
+td.textContent = '20 cookies';
+tr.appendChild(td);
+
+// td = document.createElement('td');
+// td.textContent = '30 cookies';
+// tr.appendChild(td);
+
+td = cookieStoreTableDataCell('20 cookies');
+tr.appendChild(td);
+
+function cookieStoreTableDataCell(content){
+  var resultElement = document.createElement('td');
+  resultElement.textContent = content;
+  return resultElement;
+}
+
+//if (attr){
+//   resultElement.setAttribute(attr);
+// }resultElememt.textContent = content;
 
 function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie){
   this.name = name;
