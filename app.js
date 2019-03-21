@@ -6,42 +6,43 @@ var renderStores = function(cookieStoresEl){
   var section = document.createElement('section');
   // article.setAttribute('id', `$cookieStoreOne.name.toLowerCase().replace( ' S, ')`)
   cookieStoresEl.appendChild(section);
+}
 
-  //Creating h3 Cookie One and appending it
-  var h3 = document.createElement('h3'); //Step 2
-  h3.textContent = this.name; // Step 3
-  section.appendChild(h3); //Step 4
+//   //Creating h3 Cookie One and appending it
+//   var h3 = document.createElement('h3'); //Step 2
+//   h3.textContent = this.name; // Step 3
+//   section.appendChild(h3); //Step 4
 
-  //Creating h4 Cookie One Location and appending it
-  var h4 = document.createElement('h4');
-  h4.textContent = this.location;
-  section.appendChild(h4);
+//   //Creating h4 Cookie One Location and appending it
+//   var h4 = document.createElement('h4');
+//   h4.textContent = this.location;
+//   section.appendChild(h4);
 
-  //Creating h4 Cookie One Location and appending it
-  var h4 = document.createElement('h4');
-  h4.textContent = ('Min. Hours '+`${this.minHourCust}`);
-  section.appendChild(h4);
+//   //Creating h4 Cookie One Location and appending it
+//   var h4 = document.createElement('h4');
+//   h4.textContent = ('Min. Hours '+`${this.minHourCust}`);
+//   section.appendChild(h4);
 
-  var h4 = document.createElement('h4');
-  h4.textContent = ('Max. Hours '+`${this.maxHourCust}`);
-  section.appendChild(h4);
+//   var h4 = document.createElement('h4');
+//   h4.textContent = ('Max. Hours '+`${this.maxHourCust}`);
+//   section.appendChild(h4);
 
-  //Creating ol for li for Cookie Store one
-  var ul = document.createElement('ul');
-  section.appendChild(ul);
+//   //Creating ol for li for Cookie Store one
+//   var ul = document.createElement('ul');
+//   section.appendChild(ul);
 
-  //Creates lis for hours and then creates lis for random cookies; displayed like hours:randomCookies
-  for(var i = 0; i < hoursOpen.length; i++){
-    var li= document.createElement('li');
+//   //Creates lis for hours and then creates lis for random cookies; displayed like hours:randomCookies
+//   for(var i = 0; i < hoursOpen.length; i++){
+//     var li= document.createElement('li');
 
-    var numberOfCookies = this.cookiePur();
+//     var numberOfCookies = this.cookiePur();
 
-    var content = `${hoursOpen[i]}: ${numberOfCookies} cookies`;
-    li.textContent = content;
-    ul.appendChild(li);
+//     var content = `${hoursOpen[i]}: ${numberOfCookies} cookies`;
+//     li.textContent = content;
+//     ul.appendChild(li);
 
-  }
-};
+//   }
+// };
 //--------------------------
 //Constructor Function
 //--------------------------
@@ -64,11 +65,6 @@ SalmonCookieStores.prototype.cookiePur = function(){
   var result = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
   return result;
 };
-// SalmonCookieStores.prototype.cookieStoreTableHeadCell= function(){
-//   var resultElememt = document.createElement('th');
-//   resultElememt.textContent = this.cookiePur();
-//   return resultElememt;
-// };
 SalmonCookieStores.prototype.render = renderStores;
 
 //--------------------------
@@ -111,12 +107,11 @@ for(var i = 0; i < hoursOpen.length; i++){
   tr.appendChild(th);
 }
 
-// th = cookieStoreTableHeadCell('7am');
-// tr.appendChild(th);
 
 var tbody = document.createElement('tbody');
 cookieStoreTable.appendChild(tbody);
 
+var td = document.createElement('td');
 
 //DATA CELL
 function cookieStoreTableDataCell(content){
@@ -209,33 +204,15 @@ tr.appendChild(td);
 // }
 // console.log(sumValue);
 
-
-
-// console.log(cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePur()) + cookieStoreTableDataCell(storeTwoFromConstructorFunction.cookiePur()));
-
-//if (attr){
-//   resultElement.setAttribute(attr);
-// }resultElememt.textContent = content;
-
-// var sum = 0;
-
-// for(var i = 0; i < trs.length; i++){
-//   var tds = trs[i].getElementByTagName('td');
-// }
-
-
 //-----------------
 //Run Script
 //-----------------
 var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
 console.log(cookieStoresEl);
 
-// var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
-// console.log(storeOneFromConstructorFunction);
-// storeOneFromConstructorFunction.cookieStoreTableHeadCell();
-storeOneFromConstructorFunction.render(cookieStoresEl);
-// storeTworomConstructorFunction.render(cookieStoresEl);
-
+// storeOneFromConstructorFunction.render(cookieStoresEl);
+// storeTwoFromConstructorFunction.render(cookieStoresEl);
+// storeThreeFromConstructorFunction.render(cookieStoresEl);
 
 
 
@@ -244,22 +221,29 @@ storeOneFromConstructorFunction.render(cookieStoresEl);
 ///EVENT HANDLERS
 ///------------------
 
-// var addStoreEl = document.getElementById('addStore');
-// var addStoreEventListener = function(event){
-//   addStoreEl.addEventListener('submit', function(event){
-//     console.log(event);
-//     event.preventDefault();
-//     var target = event.target;
-//     var name = target.name.value;
-//     var location = target.name.value;
-//     var minCustomers = target.minCustomers.value;
-//     var maxCustomers = target.maxCustomers.value;
-  
-//     var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
-//     newStore.render(document.getElementById('newStoreInfo'));
-//   });
-// }
-// addStoreEl.addEventListener('submit, add)
+var addStoreForm = document.getElementById('addStoreForm');
+
+var addStoreEventHandler = function(event){
+  // addStoreEl.addEventListener('submit', function(event){
+  event.preventDefault();
+  console.log(event);
+};
+
+//   var target = event.target;
+
+//   var name = target.name.value;
+//   var location = target.location.value;
+//   var minCustomers = target.minCustomers.value;
+//   var maxCustomers = target.maxCustomers.value;
+
+//   target.reset();
+
+//   var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
+//   newStore.render(document.getElementById('newStoreInfo'));
+// };
+// // addStoreForm.addEventListener('submit', addStoreEventHandler);
+
+// console.log(addStoreEventHandler());
 
 // addStoreEl.addEventListener('submit', function(event){
 //   console.log(event);
