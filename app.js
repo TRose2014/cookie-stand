@@ -1,82 +1,50 @@
-console.log('Hello World');
-
 //---------------
 // Global Functions
 //----------------
 
 var renderStores = function(cookieStoresEl){
-  var article = document.createElement('article');
+  var section = document.createElement('section');
   // article.setAttribute('id', `$cookieStoreOne.name.toLowerCase().replace( ' S, ')`)
-  cookieStoresEl.appendChild(article);
+  cookieStoresEl.appendChild(section);
 
   //Creating h3 Cookie One and appending it
   var h3 = document.createElement('h3'); //Step 2
   h3.textContent = this.name; // Step 3
-  article.appendChild(h3); //Step 4
+  section.appendChild(h3); //Step 4
 
   //Creating h4 Cookie One Location and appending it
   var h4 = document.createElement('h4');
   h4.textContent = this.location;
-  article.appendChild(h4);
+  section.appendChild(h4);
+
+  //Creating h4 Cookie One Location and appending it
+  var h4 = document.createElement('h4');
+  h4.textContent = ('Min. Hours '+`${this.minHourCust}`);
+  section.appendChild(h4);
+
+  var h4 = document.createElement('h4');
+  h4.textContent = ('Max. Hours '+`${this.maxHourCust}`);
+  section.appendChild(h4);
 
   //Creating ol for li for Cookie Store one
   var ul = document.createElement('ul');
-  article.appendChild(ul);
+  section.appendChild(ul);
 
-  //Creating for loop for li for Cookie Store One
+  //Creates lis for hours and then creates lis for random cookies; displayed like hours:randomCookies
   for(var i = 0; i < hoursOpen.length; i++){
-    var li = document.createElement('li');
-    li.textContent = hoursOpen[i];
+    var li= document.createElement('li');
+
+    var numberOfCookies = this.cookiePur();
+
+    var content = `${hoursOpen[i]}: ${numberOfCookies} cookies`;
+    li.textContent = content;
     ul.appendChild(li);
-  }
 
-  // for(var j = 0; j < this.length; j++){
-  //   var li = document.createElement('li');
-  //   li.textContent = this.allCookieStores[j];
-  //   ul.appendChild(li);
-  // }
-
-
-  for(var i = 0; i < hoursOpen.length; i++){
-    var li = document.createElement('li');
-    li.textContent = this.cookiePur();
-    ul.appendChild(li);
   }
 };
-
-// function tableCreate (){
-//   var article = document.createElement('article');
-//   var tbody = document.createElement('tbody');
-//   article.appendChild(tbody);
-//   for (var i = 0; i < 15; i++){
-//     var tr = document.createElement('tr');
-//     var td = document.createElement('td');
-//     td.textContent = hoursOpen;
-//     tbody.appendChild(tr);
-//     tr.appendChild(td);
-//   }
-//   // tbody.appendChild(tr);
-//   // tr.appendChild(td);
-//   console.log(tableCreate());
-// }
-
-var tableEl = document.getElementById('cookieStoreTable');
-
-function tableCreate(tableEl) {
-  var body = document.getElementsByTagName('body');
-  var tbl = document.createElement('table');
-  var tbdy = document.createElement('tbody');
-  var td = document.createElement('td');
-  var tr = document.createElement('tr');
-  // body.appendChild(tbl);
-  tableEl.appendChild.body;
-  tbl.appendChild(tbdy);
-  td.textContent = 'test';
-  tr.appendChild(td);
-  tbdy.appendChild(tr);
-}
-tableCreate();
-
+//--------------------------
+//Constructor Function
+//--------------------------
 
 function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie){
   this.name = name;
@@ -84,8 +52,6 @@ function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie)
   this.minHourCust = minHourCust;
   this.maxHourCust = maxHourCust;
   this.avgCookie = avgCookie;
-  this.randomCookie = [];
-  allCookieStores.push(this);
 }
 
 
@@ -94,50 +60,218 @@ SalmonCookieStores.prototype.randomCustHour = function (){
   console.log(randomNum);
   return randomNum;
 };
-// SalmonCookieStores.prototype.randomCookieHour = function(){
-//   var randomCookieHour = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
-//   return randomCookieHour;
-//   // randomCookie.push(randomCookieHour);
-
-// };
 SalmonCookieStores.prototype.cookiePur = function(){
-  for(var i = 0; i < hoursOpen.length; i++){
-    this.randomCookie.push(Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust));
-    // var randomCookieHour = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
-    return this.randomCookie;
-  }
-  // randomCookie.push(this.cookiePur());
-  // sumRandomCookie += randomCookie;
+  var result = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
+  return result;
 };
-
+// SalmonCookieStores.prototype.cookieStoreTableHeadCell= function(){
+//   var resultElememt = document.createElement('th');
+//   resultElememt.textContent = this.cookiePur();
+//   return resultElememt;
+// };
 SalmonCookieStores.prototype.render = renderStores;
 
 //--------------------------
 // Define all data
 //--------------------------
 
-var allCookieStores = [];
+// var allCookieStores = [];
 var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
-// console.log(randomCookie);
+//----------
+//TABLE
+//----------
+
+// 1. Create Parent Element
+var cookieStoreTable = document.getElementById('cookieStoreTable');
+// 2. create element
+var theadEl = document.createElement('thead');
+// 3. append
+cookieStoreTable.appendChild(theadEl);
+
+var tr = document.createElement('tr');
+theadEl.appendChild(tr);
+
+
+var th = document.createElement('th');
+tr.appendChild(th);
+
+//fucntion cookieStoreTabHeadCell(typecontent, attr);
+
+//Function creates table header
+function cookieStoreTableHeadCell(content) {
+  var resultElememt = document.createElement('th');
+  resultElememt.textContent = content;
+  return resultElememt;
+}
+
+//Loops through all hours open and creates/displays row
+for(var i = 0; i < hoursOpen.length; i++){
+  th = cookieStoreTableHeadCell(hoursOpen[i]);
+  tr.appendChild(th);
+}
+
+// th = cookieStoreTableHeadCell('7am');
+// tr.appendChild(th);
+
+var tbody = document.createElement('tbody');
+cookieStoreTable.appendChild(tbody);
+
+
+//DATA CELL
+function cookieStoreTableDataCell(content){
+  var resultElement = document.createElement('td');
+  resultElement.textContent = content;
+  return resultElement;
+}
+//CookieStoreOne Data Displayed
+td = cookieStoreTableHeadCell('1st and Pike');
+tbody.appendChild(td);
+
+
+var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
+for(var i=0; i < hoursOpen.length; i++){
+  td = cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePur());
+  tbody.appendChild(td);
+}
+//New row added
+tr = document.createElement('tr');
+tbody.appendChild(tr);
+
+//CookieStoreTwo Data Displayed
+td = cookieStoreTableHeadCell('SeaTac Airport');
+tr.appendChild(td);
+
+var storeTwoFromConstructorFunction = new SalmonCookieStores('Cookie Store Two', 'SeaTac Airport', 3, 24, 1.2);
+for(var i=0; i < hoursOpen.length; i++){
+  td = cookieStoreTableDataCell(storeTwoFromConstructorFunction.cookiePur());
+  tr.appendChild(td);
+}
+
+//New row added
+tr = document.createElement('tr');
+tbody.appendChild(tr);
+
+//CookieStoreThree Data Displayed
+td = cookieStoreTableHeadCell('Seattle Center');
+tr.appendChild(td);
+
+var storeThreeFromConstructorFunction = new SalmonCookieStores('Cookie Store Three', 'Seattle Center', 11, 38, 3.7);
+for(var i=0; i < hoursOpen.length; i++){
+  td = cookieStoreTableDataCell(storeThreeFromConstructorFunction.cookiePur());
+  tr.appendChild(td);
+}
+
+//New row added
+tr = document.createElement('tr');
+tbody.appendChild(tr);
+
+//CookieStoreFour Data Displayed
+td = cookieStoreTableHeadCell('Capitol Hill');
+tr.appendChild(td);
+
+var storeFourFromConstructorFunction = new SalmonCookieStores('Cookie Store Four', 'Capitol Hill', 20, 38, 2.3);
+for(var i=0; i < hoursOpen.length; i++){
+  td = cookieStoreTableDataCell(storeFourFromConstructorFunction.cookiePur());
+  tr.appendChild(td);
+}
+
+//New row added
+tr = document.createElement('tr');
+tbody.appendChild(tr);
+
+//CookieStoreFive Data Displayed
+td = cookieStoreTableHeadCell('Alki');
+tr.appendChild(td);
+
+var storeFiveFromConstructorFunction = new SalmonCookieStores('Cookie Store Five', 'Alki', 2, 16, 4.6);
+for(var i=0; i < hoursOpen.length; i++){
+  td = cookieStoreTableDataCell(storeFiveFromConstructorFunction.cookiePur());
+  tr.appendChild(td);
+}
+
+
+//Table Footer Displayed
+var tfoot = document.createElement('tfoot');
+cookieStoreTable.appendChild(tfoot);
+
+tr = document.createElement('tr');
+tfoot.appendChild(tr);
+
+td = cookieStoreTableHeadCell('Total');
+tr.appendChild(td);
+
+
+//Still trying to get totals to work
+// var sumValue = 0;
+// for(var i = 1; i < cookieStoreTable.rows.length; i++){
+//   sumValue = sumValue + cookieStoreTable.rows[i];
+// }
+// console.log(sumValue);
+
+
+
+// console.log(cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePur()) + cookieStoreTableDataCell(storeTwoFromConstructorFunction.cookiePur()));
+
+//if (attr){
+//   resultElement.setAttribute(attr);
+// }resultElememt.textContent = content;
+
+// var sum = 0;
+
+// for(var i = 0; i < trs.length; i++){
+//   var tds = trs[i].getElementByTagName('td');
+// }
+
+
 //-----------------
 //Run Script
 //-----------------
 var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
 console.log(cookieStoresEl);
 
-var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
+// var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
+// console.log(storeOneFromConstructorFunction);
+// storeOneFromConstructorFunction.cookieStoreTableHeadCell();
+storeOneFromConstructorFunction.render(cookieStoresEl);
+// storeTworomConstructorFunction.render(cookieStoresEl);
 
 
-for(var i = 0; i < allCookieStores.length; i++){
-  allCookieStores[i].render(cookieStoresEl);
-}
 
-console.log(storeOneFromConstructorFunction.randomCookie);
-// console.log(storeOneFromConstructorFunction.randomCookie);
-// console.log(allCookieStores);
-// for(var i = 0; i < allCookieStores.length; i++){
-//   randomCookie[i].render(cookieStoresEl);
+
+
+///----------------
+///EVENT HANDLERS
+///------------------
+
+// var addStoreEl = document.getElementById('addStore');
+// var addStoreEventListener = function(event){
+//   addStoreEl.addEventListener('submit', function(event){
+//     console.log(event);
+//     event.preventDefault();
+//     var target = event.target;
+//     var name = target.name.value;
+//     var location = target.name.value;
+//     var minCustomers = target.minCustomers.value;
+//     var maxCustomers = target.maxCustomers.value;
+  
+//     var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
+//     newStore.render(document.getElementById('newStoreInfo'));
+//   });
 // }
+// addStoreEl.addEventListener('submit, add)
+
+// addStoreEl.addEventListener('submit', function(event){
+//   console.log(event);
+//   event.preventDefault();
+//   var target = event.target;
+//   var name = target.name.value;
+//   var location = target.name.value;
+//   var minCustomers = target.minCustomers.value;
+//   var maxCustomers = target.maxCustomers.value;
+
+//   var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
+//   newStore.render(document.getElementById('newStoreInfo'));
+// });
 
 
