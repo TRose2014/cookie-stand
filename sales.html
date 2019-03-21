@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Cookie Stand</title>
+        <link rel="shortcut icon" href="">
     </head>
     <body>
         <main id= "content">
@@ -13,49 +14,27 @@
             <section id= "cookieStores"></section>
             <section id= "cookieStoreTable">
                 <table id = "cookieStoreTable">
-                        <!-- <tr id= "storeHours">
-                            <th></th>
-                            <th>6am</th>
-                            <th>7am</th>
-                            <th>8am</th>
-                            <th>9am</th>
-                            <th>10am</th>
-                            <th>11am</th>
-                            <th>12pm</th>
-                            <th>1pm</th>
-                            <th>2pm</th>
-                            <th>3pm</th>
-                            <th>4pm</th>
-                            <th>5pm</th>
-                            <th>6pm</th>
-                            <th>7pm</th>
-                            <th>8pm</th>
-                        </tr>
-                        <tr id= "storeOne">
-                            <th>1st and Pike</th>
-                                <td>35</td>
-                                <td>65</td>
-                                <td>27</td>
-                        </tr>
-                        <tr id= "storeTwo">
-                            <th>SeaTac Airport</th>
-                                <td>90</td>
-                                <td>70</td>
-                        </tr>
-                        <tr id= "storeThree">
-                            <td>Seattle Center</td>
-                        </tr>
-                        <tr id= "Capitol Hill">
-                            <td>Capital Hill</td>
-                        </tr>
-                        <tr id= "Alki">
-                            <td>Alki</td>
-                        </tr>
-                        <tr id= "Totals">
-                            <td>Totals</td>
-                        </tr>
-                    </tbody> -->
                 </table>
+            </section>
+            <section>
+                <form id="addStoreForm">
+                    <fieldset>
+                        <legend>Store Info</legend>
+                        <label>Name</label>
+                        <input name="name" type="text"/>
+                        <label>Location</label>
+                        <input name="location" type="text"/>
+                        <label>Min. Customers</label>
+                        <input name="minCustomers" type="number"/>
+                        <label>Max. Customers</label>
+                        <input name="maxCustomers"type="number"/>
+                        <label>Average Cookies</label>
+                        <input name="avgCookie"type="number"/>
+                    </fieldset>
+                    <button type="submit">Submit</button>
+                </form>
+            </section>
+            <section id = "newStoreInfo"><
             </section>
         </main>
         <script src= "app.js"></script>
