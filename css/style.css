@@ -1,19 +1,58 @@
 body{
-    background-color: blueviolet;
-}
+background-color: navajowhite}
 
 /* Production Page */
 #salmonPic{
-    background-color: aquamarine
+    background-color: cornsilk;
+}
+
+img{
+    margin-left: 20%; 
 }
 
 li{
     list-style: none;
     float: right;
+    font-size: 30px;
 }
 
 h2{
     text-align: center;
+}
+
+h3{
+    font-family: 'Crete Round', serif;
+    font-size: 200%
+}
+h5{
+    margin: 0px;
+    font-family: 'Crete Round', serif;
+}
+
+.storeInfo{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#storeHours{
+    margin-top: 20%;
+    border-right: 2px black dashed;
+}
+
+#storePhone{
+    margin-top: 20%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-right: 2px black dashed;
+}
+
+#storeMap{
+    margin-top: 20%;
+}
+
+p{
+    margin: 0px;
+    font-family: 'Arapey', serif;
 }
 
 /* Sales Page */
