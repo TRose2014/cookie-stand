@@ -1,0 +1,44 @@
+body{
+    background-color: blueviolet;
+}
+
+/* Production Page */
+#salmonPic{
+    background-color: aquamarine
+}
+
+li{
+    list-style: none;
+    float: right;
+}
+
+h2{
+    text-align: center;
+}
+
+/* Sales Page */
+#cookieStoreTable{
+    border-spacing: 15px;
+    font-size: 30px;
+}
+
+legend{
+    font-size: 300%;
+}
+
+label{
+    font-size: 200%;
+}
+
+input{
+    padding: 5px;
+}
+
+button{
+    background-color: lightblue;
+    width: 33%;
+    margin-top: 3%;
+    margin-left: 30%;
+    font-size: 200%;
+}
+

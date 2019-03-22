@@ -1,79 +1,42 @@
+var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
+
 //---------------
 // Global Functions
 //----------------
 
-var renderStores = function(cookieStoresEl){
+var renderStores = function(){
   var section = document.createElement('section');
-  // article.setAttribute('id', `$cookieStoreOne.name.toLowerCase().replace( ' S, ')`)
   cookieStoresEl.appendChild(section);
-}
+};
 
-//   //Creating h3 Cookie One and appending it
-//   var h3 = document.createElement('h3'); //Step 2
-//   h3.textContent = this.name; // Step 3
-//   section.appendChild(h3); //Step 4
-
-//   //Creating h4 Cookie One Location and appending it
-//   var h4 = document.createElement('h4');
-//   h4.textContent = this.location;
-//   section.appendChild(h4);
-
-//   //Creating h4 Cookie One Location and appending it
-//   var h4 = document.createElement('h4');
-//   h4.textContent = ('Min. Hours '+`${this.minHourCust}`);
-//   section.appendChild(h4);
-
-//   var h4 = document.createElement('h4');
-//   h4.textContent = ('Max. Hours '+`${this.maxHourCust}`);
-//   section.appendChild(h4);
-
-//   //Creating ol for li for Cookie Store one
-//   var ul = document.createElement('ul');
-//   section.appendChild(ul);
-
-//   //Creates lis for hours and then creates lis for random cookies; displayed like hours:randomCookies
-//   for(var i = 0; i < hoursOpen.length; i++){
-//     var li= document.createElement('li');
-
-//     var numberOfCookies = this.cookiePur();
-
-//     var content = `${hoursOpen[i]}: ${numberOfCookies} cookies`;
-//     li.textContent = content;
-//     ul.appendChild(li);
-
-//   }
-// };
 //--------------------------
 //Constructor Function
 //--------------------------
 
-function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie){
+function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie, cookiePurchasedEachStoreHour){
   this.name = name;
   this.location = location;
   this.minHourCust = minHourCust;
   this.maxHourCust = maxHourCust;
   this.avgCookie = avgCookie;
+  this.cookiePurchasedEachStoreHour = cookiePurchasedEachStoreHour;
+  allCookieStores.push(this);
 }
-
-
-SalmonCookieStores.prototype.randomCustHour = function (){
-  var randomNum = Math.floor(Math.random() * 50);
-  console.log(randomNum);
-  return randomNum;
-};
-SalmonCookieStores.prototype.cookiePur = function(){
+//Generates Random Cookies Purchased
+SalmonCookieStores.prototype.cookiePurchase = function(){
   var result = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
   return result;
 };
+//Attaches CookieStore to Section
 SalmonCookieStores.prototype.render = renderStores;
 
 //--------------------------
 // Define all data
 //--------------------------
 
-// var allCookieStores = [];
+var allCookieStores = [];
 var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-
+var storesTotal = [];
 //----------
 //TABLE
 //----------
@@ -107,7 +70,6 @@ for(var i = 0; i < hoursOpen.length; i++){
   tr.appendChild(th);
 }
 
-
 var tbody = document.createElement('tbody');
 cookieStoreTable.appendChild(tbody);
 
@@ -126,7 +88,7 @@ tbody.appendChild(td);
 
 var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
 for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePur());
+  td = cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePurchase());
   tbody.appendChild(td);
 }
 //New row added
@@ -139,7 +101,7 @@ tr.appendChild(td);
 
 var storeTwoFromConstructorFunction = new SalmonCookieStores('Cookie Store Two', 'SeaTac Airport', 3, 24, 1.2);
 for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(storeTwoFromConstructorFunction.cookiePur());
+  td = cookieStoreTableDataCell(storeTwoFromConstructorFunction.cookiePurchase());
   tr.appendChild(td);
 }
 
@@ -153,7 +115,7 @@ tr.appendChild(td);
 
 var storeThreeFromConstructorFunction = new SalmonCookieStores('Cookie Store Three', 'Seattle Center', 11, 38, 3.7);
 for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(storeThreeFromConstructorFunction.cookiePur());
+  td = cookieStoreTableDataCell(storeThreeFromConstructorFunction.cookiePurchase());
   tr.appendChild(td);
 }
 
@@ -167,7 +129,7 @@ tr.appendChild(td);
 
 var storeFourFromConstructorFunction = new SalmonCookieStores('Cookie Store Four', 'Capitol Hill', 20, 38, 2.3);
 for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(storeFourFromConstructorFunction.cookiePur());
+  td = cookieStoreTableDataCell(storeFourFromConstructorFunction.cookiePurchase());
   tr.appendChild(td);
 }
 
@@ -181,9 +143,13 @@ tr.appendChild(td);
 
 var storeFiveFromConstructorFunction = new SalmonCookieStores('Cookie Store Five', 'Alki', 2, 16, 4.6);
 for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(storeFiveFromConstructorFunction.cookiePur());
+  td = cookieStoreTableDataCell(storeFiveFromConstructorFunction.cookiePurchase());
   tr.appendChild(td);
 }
+
+//New row added
+tr = document.createElement('tr');
+tbody.appendChild(tr);
 
 
 //Table Footer Displayed
@@ -196,26 +162,21 @@ tfoot.appendChild(tr);
 td = cookieStoreTableHeadCell('Total');
 tr.appendChild(td);
 
-
-//Still trying to get totals to work
-// var sumValue = 0;
-// for(var i = 1; i < cookieStoreTable.rows.length; i++){
-//   sumValue = sumValue + cookieStoreTable.rows[i];
-// }
-// console.log(sumValue);
+// Totals for Stores by Hour
+for(var i = 0; i < hoursOpen.length; i++){
+  var storesSum = 0;
+  td = document.createElement('td');
+  for(var j = 0; j < allCookieStores.length; j++){
+    // var storesSum = 0;
+    storesSum += allCookieStores[0].hoursOpen;
+  }
+  td.textContent = storesSum;
+  tr.appendChild(td);
+}
 
 //-----------------
 //Run Script
 //-----------------
-var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
-console.log(cookieStoresEl);
-
-// storeOneFromConstructorFunction.render(cookieStoresEl);
-// storeTwoFromConstructorFunction.render(cookieStoresEl);
-// storeThreeFromConstructorFunction.render(cookieStoresEl);
-
-
-
 
 ///----------------
 ///EVENT HANDLERS
@@ -224,38 +185,40 @@ console.log(cookieStoresEl);
 var addStoreForm = document.getElementById('addStoreForm');
 
 var addStoreEventHandler = function(event){
-  // addStoreEl.addEventListener('submit', function(event){
+  // var footElement  = document.getElementById('cookieStoreTable');
   event.preventDefault();
-  console.log(event);
+
+
+  var target = event.target;
+
+  var newName = target.name.value;
+  var newLocation = target.location.value;
+  var minCustomers = parseInt(target.minCustomers.value);
+  var maxCustomers = parseInt(target.maxCustomers.value);
+  var newAvgCookies = parseInt(target.avgCookie.value);
+
+  target.reset();
+
+  var newStore = new SalmonCookieStores(newName, newLocation, minCustomers, maxCustomers, newAvgCookies);
+// allCookieStores.push(newStore);
+
+  //CookieStoreNew Data Displayed
+  td = cookieStoreTableHeadCell(newLocation);
+  tr.appendChild(td);
+  //------WORKING!!------
+  for(var i=0; i < hoursOpen.length; i++){
+    td = cookieStoreTableDataCell(newStore.cookiePurchase());
+    tr.appendChild(td);
+  }
+
+  // console.log(newLocation);
+  // console.log(allCookieStores);
+
+  tr = document.createElement('tr');
+  tbody.appendChild(tr);
+
+  // console.log(newStore);
 };
+addStoreForm.addEventListener('submit', addStoreEventHandler);
 
-//   var target = event.target;
-
-//   var name = target.name.value;
-//   var location = target.location.value;
-//   var minCustomers = target.minCustomers.value;
-//   var maxCustomers = target.maxCustomers.value;
-
-//   target.reset();
-
-//   var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
-//   newStore.render(document.getElementById('newStoreInfo'));
-// };
-// // addStoreForm.addEventListener('submit', addStoreEventHandler);
-
-// console.log(addStoreEventHandler());
-
-// addStoreEl.addEventListener('submit', function(event){
-//   console.log(event);
-//   event.preventDefault();
-//   var target = event.target;
-//   var name = target.name.value;
-//   var location = target.name.value;
-//   var minCustomers = target.minCustomers.value;
-//   var maxCustomers = target.maxCustomers.value;
-
-//   var newStore = new SalmonCookieStores(name, location, minCustomers, maxCustomers);
-//   newStore.render(document.getElementById('newStoreInfo'));
-// });
-
-
+// console.log(allCookieStores);

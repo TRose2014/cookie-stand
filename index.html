@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+    </head>
     <body>
         <main id= "content">
             <nav>
@@ -8,27 +10,16 @@
                     <li><a href= "sales.html">Sales</a></li>
                 </ul>
             </nav>
-            ><section>
-                <form id="addStoreForm">
-                    <fieldset>
-                        <legend>Store Info</legend>
-                        <label>Name</label>
-                        <input name="name" type="text"/>
-                        <label>Location</label>
-                        <input name="location" type="text"/>
-                        <label>Min. Customers</label>
-                        <input name="minCustomers" type="number"/>
-                        <label>Max. Customers</label>
-                        <input name="maxCustomers"type="number"/>
-
-                    </fieldset>
-                    <button type="submit">Submit</button>
-                </form>
+            <section id = "salmonPic">
+            <img src= "./img/salmon.png" alt="Picture of a Salmon">
             </section>
-            <section id = "newStoreInfo">
-
+            <section>
+                <h2 id= "welcomeMessage"></h2>
             </section>
+            <article class = "storeInfo">
+                
+            </article>
         </main>
-        <script src= "app.js"></script>
+        <script src= "./js/index.js"></script>
     </body>
 </html>
