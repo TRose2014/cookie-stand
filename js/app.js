@@ -86,6 +86,16 @@ td = cookieStoreTableHeadCell('1st and Pike');
 tbody.appendChild(td);
 
 
+
+// function renderTable(){
+//   for(var i = 0; i < cookieStoresEl.length; i++){
+//     allCookieStores[i].render(cookieStoresEl);
+//   }
+// }
+
+// td.textContent = `${allCookieStores[i].cookiePurchase()}`;
+
+
 var storeOneFromConstructorFunction = new SalmonCookieStores('Cookie Store One', '1st and Pike', 23, 65, 6.3);
 for(var i=0; i < hoursOpen.length; i++){
   td = cookieStoreTableDataCell(storeOneFromConstructorFunction.cookiePurchase());
@@ -147,9 +157,9 @@ for(var i=0; i < hoursOpen.length; i++){
   tr.appendChild(td);
 }
 
-//New row added
-tr = document.createElement('tr');
-tbody.appendChild(tr);
+// //New row added
+// tr = document.createElement('tr');
+// tbody.appendChild(tr);
 
 
 //Table Footer Displayed
@@ -160,20 +170,34 @@ tr = document.createElement('tr');
 tfoot.appendChild(tr);
 
 td = cookieStoreTableHeadCell('Total');
-tr.appendChild(td);
+tfoot.appendChild(td);
 
 // Totals for Stores by Hour
-for(var i = 0; i < hoursOpen.length; i++){
-  var storesSum = 0;
-  td = document.createElement('td');
-  for(var j = 0; j < allCookieStores.length; j++){
-    // var storesSum = 0;
-    storesSum += allCookieStores[0].hoursOpen;
-  }
-  td.textContent = storesSum;
-  tr.appendChild(td);
-}
+// for(var i = 0; i < hoursOpen.length; i++){
+//   var storesSum = 0;
+//   td = document.createElement('td');
+//   for(var j = 0; j < allCookieStores.length; j++){
+//     // var storesSum = 0;
+//     storesSum.push(allCookieStores[0].hoursOpen);
+//   }
+//   td.textContent = storesSum;
+//   tfoot.appendChild(td);
+// }
 
+// Adds total at the end
+// var numCookieArray = [];
+// var sumCookieArray = 0;
+
+// function cookiePurchaseSum(){
+//   for(var i = 0; i < hoursOpen.length; i++){
+//     numCookieArray.push(SalmonCookieStores.cookiePurchase());
+//     sumCookieArray += numCookieArray[i];
+//   }
+//   numCookieArray.push(sumCookieArray);
+// }
+
+// cookiePurchaseSum();
+// console.log(numCookieArray);
 //-----------------
 //Run Script
 //-----------------
