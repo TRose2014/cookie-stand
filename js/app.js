@@ -167,75 +167,11 @@ cookieStoreTable.appendChild(tfoot);
 tr = document.createElement('tr');
 tfoot.appendChild(tr);
 
-td = cookieStoreTableHeadCell('Total');
-tfoot.appendChild(td);
+//---------Toal appended to the TFoot--------------//
+// td = cookieStoreTableHeadCell('Total');
+// tfoot.appendChild(td);
 
 
-//Appends data to total row
-// for(var i=0; i < hoursOpen.length; i++){
-//   // td = cookieStoreTableDataCell(2);
-//   td = cookieStoreTableDataCell(renderRowOfTotals(cookieStoresEl, allCookieStores));
-//   tfoot.appendChild(td);
-// }
-
-//------Close to getting totals---------//
-
-
-// var randomCustomer = function(maxCustomer, minCustomer){
-//   return Math.floor(Math.random() * (maxCustomer - minCustomer) + minCustomer);
-// };
-
-
-// for (var k = 0; k < hoursOpen.length; k++){
-//   var totalCookies = Math.ceil(randomCustomer(this.maxCustomer, this.minCustomer) * this.averageCookieSold);
-//   cookiesPurchasePerHour.push(totalCookies);
-// }
-// console.log(storeFiveFromConstructorFunction.cookiePurchase());
-
-// for(var i = 0; i < allCookieStores.length; i++){
-//   for(var j = 0; j < hoursOpen.length; j++){
-//     console.log(cookiesPurchasePerHour);
-//   }
-  
-// }
-
-// console.log(cookiesPurchasePerHour);
-// console.log(allCookieStores);
-
-// for (var i = 0; i < cookiesPurchasePerHour.length; i++){
-//   var storeTotals = 0;
-//   for(var j = 0; j < allCookieStores.length; j++){
-//     storeTotals += allCookieStores.cookiesPurchasePerHour;
-//   }
-//   console.log(storeTotals);
-// }
-// console.log(SalmonCookieStores);
-
-// for(var i = 0; i < allCookieStores[0].cookiePurchase().length; i++){
-//   var storesTotal = 0;
-//   for(var j = 0; j < allCookieStores.length; j++){
-//     storesTotal += allCookieStores[j].cookiePurchase()[i];
-//     console.log(storesTotal);
-//   }
-// }
-
-// var renderRowOfTotals = function(parentElement, locationStores) {
-//   var tr = document.createElement('tr');
-//   // tr.setAttribute('id', ROW_ATTRIBUTE_FOR_TOTALS);
-//   parentElement.appendChild(tr);
-
-
-//   for (var i = 0; i < locationStores[0].cookiesPurchasePerHour.length; i++) {
-//     var storeTotals = 0;
-//     td = document.createElement('td');
-//     for (var j = 0; j < locationStores.length; j++) {
-//       storeTotals += locationStores[j].cookiesPurchasePerHour[i];    
-//     }
-//     td.textContent = storeTotals;
-//     tr.appendChild(td);
-//     // console.log(locationStores[i]);
-//   }
-// };
 console.log(allCookieStores);
 // for(var i = 0; i < hoursOpen.length; i++){
 //   var storeTotals = 0;
@@ -259,56 +195,10 @@ for(var i = 0; i < hoursOpen.lenqth; i++){
     console.log(storeTotals);
   }
 }
-
-
-// for(var i = 0; i < hoursOpen.length; i++){
-//   td = cookieStoreTableDataCell(cookiesPurchasePerHour);
-//   tfoot.appendChild(td);
-// }
-
-
-// for(var i= 0; i < storeFiveFromConstructorFunction.cookiePurchase().length; i++){
-//   var totals = 0;
-//   // console.log(totals);
-//   for(var j =0; j < hoursOpen; j++){
-//     totals += storeFiveFromConstructorFunction.cookiePurchase().length;
-//     // console.log(totals);
-//   }
-//   console.log(totals);
-// }
-
-// var numCookieArrayFour = [];
-// var sumCookieArrayFour = 0;
-
-// function cookiePurFour(){
-//   for(var i = 0; i < hoursOpen.length; i++){
-//     numCookieArrayFour.push(storeTwoFromConstructorFunction.cookiePurchase());
-//     console.log(numCookieArrayFour);
-//     // sumCookieArrayFour += numCookieArrayFour[i];
-//   }
-// //   numCookieArrayFour.push(storeTwoFromConstructorFunction.sumCookieArrayOne);
-// }
-
-// cookiePurFour();
-// console.log(numCookieArrayFour);
-
-// var sumTwo = numCookieArrayFour.reduce(add);
-// function add (a, b) {
-//   return a + b;
-// }
-// // console.log(cookiesPurchasePerHour);
-// console.log(sumTwo);
-
-// console.log(totals);
-
-
 //-----------------
 //Run Script
 //-----------------
 
-console.log(cookiesPurchasePerHour);
-console.log(storeThreeFromConstructorFunction.cookiePurchase());
-console.log(storeTwoFromConstructorFunction.cookiePurchase() + storeThreeFromConstructorFunction.cookiePurchase());
 
 ///----------------
 ///EVENT HANDLERS
@@ -346,15 +236,22 @@ var addStoreEventHandler = function(event){
   tbody.appendChild(tr);
 
   //Calculates Grand Total
-var sum = cookiesPurchasePerHour.reduce(add);
-function add (a, b) {
-  return a + b;
-}
-//Appends Grand Total
-var h2 = document.createElement('h2');
-h2.textContent = `Grand Total: ${sum}`;
-tfoot.appendChild(h2);
+  // var sum = cookiesPurchasePerHour.reduce(add);
+  var grandTotal = function(){
+    var sum = cookiesPurchasePerHour.reduce(add);
+    function add (a, b) {
+      return a + b;
+    }
+    //Appends Grand Total
+    // var h2 = document.createElement('h2');
+    td = cookieStoreTableHeadCell(`Grand Total: ${sum}`);
+    tfoot.appendChild(td);
+    // h2.textContent = `Grand Total: ${sum}`;
+    // tfoot.appendChild(h2);
 
+  };
+  grandTotal();
 };
+
 addStoreForm.addEventListener('submit', addStoreEventHandler);
 
