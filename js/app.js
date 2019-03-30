@@ -1,6 +1,13 @@
-var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
+'use strict';
 
+//--------------------------
+// Define all data
+//--------------------------
+var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
 var cookiesPurchasePerHour = [];
+var allCookieStores = [];
+var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+
 //---------------
 // Global Functions
 //----------------
@@ -30,14 +37,6 @@ SalmonCookieStores.prototype.cookiePurchase = function(){
 };
 //Attaches CookieStore to Section
 SalmonCookieStores.prototype.render = renderStores;
-
-//--------------------------
-// Define all data
-//--------------------------
-
-var allCookieStores = [];
-var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-
 
 //--------------------
 // Creating TABLE
@@ -146,7 +145,7 @@ for(var i=0; i < hoursOpen.length; i++){
 tr = document.createElement('tr');
 tbody.appendChild(tr);
 
-//CookieStoreFive Data Displayed
+//CookieStoreFive Head Displayed
 td = cookieStoreTableHeadCell('Alki');
 tr.appendChild(td);
 
@@ -162,51 +161,29 @@ cookieStoreTable.appendChild(tfoot);
 tr = document.createElement('tr');
 tfoot.appendChild(tr);
 
-td = cookieStoreTableHeadCell('Total');
-tfoot.appendChild(td);
+
+// ------Total Row - will show once I get calculations completed----//
+// td = cookieStoreTableHeadCell('Total');
+// tfoot.appendChild(td);
 
 
-//Appends data to total row
-for(var i=0; i < hoursOpen.length; i++){
-  td = cookieStoreTableDataCell(2);
-  tfoot.appendChild(td);
-}
-
-//------Close to getting totals---------//
-
-
-// var randomCustomer = function(maxCustomer, minCustomer){
-//   return Math.floor(Math.random() * (maxCustomer - minCustomer) + minCustomer);
-// };
-
-
-// for (var k = 0; k < hoursOpen.length; k++){
-//   var totalCookies = Math.ceil(randomCustomer(this.maxCustomer, this.minCustomer) * this.averageCookieSold);
-//   cookiesPurchasePerHour.push(totalCookies);
+// //Appends data to total row
+// for(var i=0; i < hoursOpen.length; i++){
+//   td = cookieStoreTableDataCell(2);
+//   tfoot.appendChild(td);
 // }
+
 console.log(cookiesPurchasePerHour);
 
 for(var i = 0; i < allCookieStores.length; i++){
   console.log(cookiesPurchasePerHour);
 }
 
-// for(var i = 0; i < hoursOpen.length; i++){
-//   td = cookieStoreTableDataCell(cookiesPurchasePerHour);
-//   tfoot.appendChild(td);
-// }
-
 // //Calculates Grand Total 
 var sum = cookiesPurchasePerHour.reduce(add);
 function add (a, b) {
   return a + b;
 }
-// console.log(cookiesPurchasePerHour);
-console.log(sum);
-
-
-//-----------------
-//Run Script
-//-----------------
 
 ///----------------
 ///EVENT HANDLERS
