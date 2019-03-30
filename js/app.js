@@ -7,13 +7,19 @@ var combinedDailyTotals = [];
 var combinedHourlyTotals = [];
 var allCookieStores = [];
 
+var tr = document.createElement('tr');
+var td = document.createElement('td');
+var th = document.createElement('th');
+
+var cookieStoreTable = document.getElementById('cookieStores');
+
 //---------------
 // Global Functions
 //----------------
 
 function addTableToDOM(){
   // Creating HTML Elements
-  var cookieStoreTable = document.getElementById('cookieStores');
+  // var cookieStoreTable = document.getElementById('cookieStores');
 
   //Creates Table Element
   var table = document.createElement('table');
@@ -47,10 +53,10 @@ function addTableToDOM(){
   tr.appendChild(th);
 
   //Creates Table Body
-  var tbody = document.createElement('tbody');
-  tbody.setAttribute('id', 'tableBody');
-  cookieStoreTable.appendChild(tbody);
-  console.log(tbody);
+  // var tbody = document.createElement('tbody');
+  // tbody.setAttribute('id', 'tableBody');
+  // cookieStoreTable.appendChild(tbody);
+  // console.log(tbody);
 
   var tfoot = document.createElement('tfoot');
   table.appendChild(tfoot);
@@ -121,11 +127,11 @@ var renderShop = function(){
 
 //Head Cell
 function cookieStoreTableHeadCell(content) {
-  var tbody = document.getElementById('cookieSalesTable');
+  // var tbody = document.getElementById('cookieSalesTable');
   var resultElememt = document.createElement('th');
   resultElememt.textContent = content;
-  tbody.appendChild(resultElememt);
-  // return resultElememt;
+  cookieStoreTable.appendChild(resultElememt);
+  return resultElememt;
 }
 
 //Data Cell
@@ -214,6 +220,19 @@ var addStoreEventHandler = function(event){
 
   var newStore = new SalmonCookieStores(newName, newLocation, minCustomers, maxCustomers, newAvgCookies);
 
+
+//CookieStoreNew Data Displayed
+
+  td = cookieStoreTableHeadCell(newLocation);
+  // tr.appendChild(td);
+  console.log(td);
+
+  for(var i=0; i < hoursOpen.length; i++){
+    td = cookieStoreTableDataCell(newStore.calculateCookiesSoldHourly());
+    tr.appendChild(td);
+    console.log(td);
+  }
+
   // var tr = document.createElement('tr');
   // // theadEl.appendChild(tr);
   
@@ -231,13 +250,10 @@ var addStoreEventHandler = function(event){
 
 
   //CookieStoreNew Data Displayed
-  var td = document.createElement('td');
-  td = cookieStoreTableHeadCell(newLocation);
+  // var td = document.createElement('td');
+  // td = cookieStoreTableHeadCell(newLocation);
   // var tbody = document.createElement('tbody');
 
-  
-  
-  console.log(td);
 
   // var tr = document.createElement('tr');
   // tr.appendChild(td);
