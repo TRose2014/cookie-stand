@@ -3,8 +3,7 @@
 //--------------------------
 // Define all data
 //--------------------------
-var cookieStoresEl = document.getElementById('cookieStores'); //Step 1
-var cookiesPurchasePerHour = [];
+var cookieStoresEl = document.getElementById('cookieStores');
 var allCookieStores = [];
 var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
 
@@ -27,12 +26,13 @@ function SalmonCookieStores(name, location, minHourCust, maxHourCust, avgCookie)
   this.minHourCust = minHourCust;
   this.maxHourCust = maxHourCust;
   this.avgCookie = avgCookie;
+  this.cookiesPurchasePerHour = [];
   allCookieStores.push(this);
 }
 //Generates Random Cookies Purchased
 SalmonCookieStores.prototype.cookiePurchase = function(){
   var result = Math.floor(Math.random() * (this.maxHourCust - this.minHourCust) + this.minHourCust);
-  cookiesPurchasePerHour.push(result);
+  this.cookiesPurchasePerHour.push(result);
   return result;
 };
 //Attaches CookieStore to Section
@@ -162,28 +162,26 @@ tr = document.createElement('tr');
 tfoot.appendChild(tr);
 
 
-// ------Total Row - will show once I get calculations completed----//
-// td = cookieStoreTableHeadCell('Total');
-// tfoot.appendChild(td);
-
+// ------Total Row----//
+td = cookieStoreTableHeadCell('Total');
+tfoot.appendChild(td);
 
 // //Appends data to total row
-// for(var i=0; i < hoursOpen.length; i++){
-//   td = cookieStoreTableDataCell(2);
-//   tfoot.appendChild(td);
-// }
-
-console.log(cookiesPurchasePerHour);
-
-for(var i = 0; i < allCookieStores.length; i++){
-  console.log(cookiesPurchasePerHour);
+for (var i =0; i < hoursOpen.length; i++){
+  var total = 0;
+  for (var j = 0; j < allCookieStores.length; j++){
+    total += allCookieStores[j].cookiesPurchasePerHour[i];
+  }
+  td = cookieStoreTableDataCell(total);
+  tfoot.appendChild(td);
 }
+
 
 // //Calculates Grand Total 
-var sum = cookiesPurchasePerHour.reduce(add);
-function add (a, b) {
-  return a + b;
-}
+// var sum = cookiesPurchasePerHour.reduce(add);
+// function add (a, b) {
+//   return a + b;
+// }
 
 ///----------------
 ///EVENT HANDLERS
