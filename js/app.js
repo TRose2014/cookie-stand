@@ -6,6 +6,9 @@
 var cookieStoresEl = document.getElementById('cookieStores');
 var allCookieStores = [];
 var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var combinedDailyTotals = [];
+var combinedHourlyTotals = [];
+
 
 //---------------
 // Global Functions
@@ -14,6 +17,31 @@ var hoursOpen = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm
 var renderStores = function(){
   var section = document.createElement('section');
   cookieStoresEl.appendChild(section);
+};
+
+var renderShop = function(){
+  var tbody = document.getElementById('cookieSalesTable');
+  // var tbody = document.createElement('tbody');
+  for(var i =0; i < allCookieStores.length; i++){
+    var tr = document.createElement('tr');
+    // tr.setAttribute('id', 'shop' +i);
+    // tbody.appendChild(tr);
+
+    var td = document.createElement('td');
+    td.textContent = `${allCookieStores[i].location}`;
+    tr.appendChild(td);
+    for(var j = 0; j < hoursOpen.length; j++){
+      td = document.createElement('td');
+      td.textContent = `${allCookieStores[i].cookiesPurchasePerHour[j]}`;
+      tr.appendChild(td);
+      combinedHourlyTotals.push(parseInt(`${allCookieStores[i].cookiesPurchasePerHour[j]}`));
+    }
+    td = document.createElement('td');
+    td.textContent = `${allCookieStores[i].totalCookiesSold}`;
+    tr.appendChild(td);
+    combinedDailyTotals.push(`${allCookieStores[i].totalCookiesSold}`);
+
+  }
 };
 
 //--------------------------
@@ -154,6 +182,7 @@ for(var i=0; i < hoursOpen.length; i++){
   td = cookieStoreTableDataCell(storeFiveFromConstructorFunction.cookiePurchase());
   tr.appendChild(td);
 }
+
 //Table Footer Displayed
 var tfoot = document.createElement('tfoot');
 cookieStoreTable.appendChild(tfoot);
@@ -182,6 +211,7 @@ for (var i =0; i < hoursOpen.length; i++){
 // function add (a, b) {
 //   return a + b;
 // }
+renderShop();
 
 ///----------------
 ///EVENT HANDLERS
@@ -218,6 +248,7 @@ var addStoreEventHandler = function(event){
   tr = document.createElement('tr');
   tbody.appendChild(tr);
 
+  console.log(allCookieStores);
 };
 addStoreForm.addEventListener('submit', addStoreEventHandler);
 
